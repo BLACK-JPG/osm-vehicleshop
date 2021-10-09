@@ -76,6 +76,7 @@ AddEventHandler('qb-vehicleshop:server:buyShowroomVehicle', function(vehicle, cl
             message = "You bought: "..vehicle.."<br><br>Price: $"..vehiclePrice.." <br><br>Thanks for your payment<br><br> Best regards, <br><br> PDM Shop"
         })
         TriggerClientEvent('qb-vehicleshop:client:buyShowroomVehicle', src, vehicle, plate)
+	TriggerEvent('qb-bossmenu:server:addAccountMoney', "cardealer", vehiclePrice)
         pData.Functions.RemoveMoney('bank', vehiclePrice, "vehicle-bought-in-showroom")
         TriggerEvent("qb-log:server:sendLog", cid, "vehiclebought", {model=vehicle, name=QBCore.Shared.Vehicles[vehicle]["name"], from="showroom", moneyType="bank", price=QBCore.Shared.Vehicles[vehicle]["price"], plate=plate})
         TriggerEvent("qb-log:server:CreateLog", "vehicleshop", "Vehicle bought (showroom)", "green", "**"..GetPlayerName(src) .. "** has bought " .. QBCore.Shared.Vehicles[vehicle]["name"] .. " one for $" .. QBCore.Shared.Vehicles[vehicle]["price"])
@@ -111,6 +112,7 @@ AddEventHandler('qb-vehicleshop:server:FinanceVehicle', function(vehicle, class,
                                 message = "You bought: "..vehicle.."<br><br>Base price: $"..vehiclePrice.." <br><br>Down Payment: $"..downp.."<br><br>Left amount: $"..vehicleValue.."<br><br>Payment per day: $"..financeInstallment.."<br><br>Thanks for your payment<br><br>*Note: You will need to pay all the finance before buy a new car.<br><br> Best regards, <br><br> PDM Shop"
                             })
                             TriggerClientEvent('qb-vehicleshop:client:buyShowroomVehicle', src, vehicle, plate)
+		            TriggerEvent('qb-bossmenu:server:addAccountMoney', "cardealer", vehiclePrice)
                             pData.Functions.RemoveMoney('bank', downp, "vehicle-financed-in-showroom")
                             TriggerEvent("qb-log:server:sendLog", cid, "vehiclebought", {model=vehicle, name=QBCore.Shared.Vehicles[vehicle]["name"], from="showroom", moneyType="bank", price=QBCore.Shared.Vehicles[vehicle]["price"], plate=plate})
                             TriggerEvent("qb-log:server:CreateLog", "vehicleshop", "Vehicle bought (showroom)", "green", "**"..GetPlayerName(src) .. "** has bought " .. QBCore.Shared.Vehicles[vehicle]["name"] .. " one for $" .. QBCore.Shared.Vehicles[vehicle]["price"])
